@@ -112,3 +112,9 @@ extension StartScreenView: DelegatePressedButtonProtocol {
         }
     }
 }
+
+extension StartScreenView: DelegateToControllerProtocol {
+    func passToController<T>(info: T?) -> T? {
+        phoneNumberTextField.text as? T
+    }
+}

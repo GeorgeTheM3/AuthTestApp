@@ -10,6 +10,7 @@ import UIKit
 class StartViewController: UIViewController {
     
     private weak var delegateToStartView: DelegatePressedButtonProtocol?
+    private weak var getInfoFromView: DelegateToControllerProtocol?
     
     override func loadView() {
         super.loadView()
@@ -41,6 +42,7 @@ class StartViewController: UIViewController {
     private func delegateToView() -> UIView {
         let view = StartScreenView()
         delegateToStartView = view
+        getInfoFromView = view
         return view
     }
 
@@ -49,5 +51,13 @@ class StartViewController: UIViewController {
     }
     
     @objc private func signInAction() {
+        guard let phoneNumber = getInfoFromView?.passToController(info: String()) else { return }
+        AuthManager.shared.startAuth(phoneNumber: phoneNumber) { [weak self] success in
+            guard success else { return }
+            DispatchQueue.main.async {
+                print("success")
+                print("\(success)")
+            }
+        }
     }
 }

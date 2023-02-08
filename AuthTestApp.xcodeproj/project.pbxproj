@@ -19,6 +19,8 @@
 		5E6F23D229934F68009F658B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5E6F23D129934F68009F658B /* FirebaseAuth */; };
 		5E6F23D42993532F009F658B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E6F23D32993532F009F658B /* GoogleService-Info.plist */; };
 		5E6F23D6299357C7009F658B /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F23D5299357C7009F658B /* AuthManager.swift */; };
+		5E6F23D929935C21009F658B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F23D829935C21009F658B /* MainViewController.swift */; };
+		5E6F23DB29935D3A009F658B /* DelegateToControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F23DA29935D3A009F658B /* DelegateToControllerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		5E6F23CE2992D324009F658B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5E6F23D32993532F009F658B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E6F23D5299357C7009F658B /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		5E6F23D829935C21009F658B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		5E6F23DA29935D3A009F658B /* DelegateToControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateToControllerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 				5E6F23CD2992D319009F658B /* Helper */,
 				5E6F23CA2992D2E5009F658B /* Protocols */,
 				5E6F23C72992D2B0009F658B /* StartScreen */,
+				5E6F23D829935C21009F658B /* MainViewController.swift */,
 				5E6F23B72992D1BB009F658B /* Assets.xcassets */,
 				5E6F23B92992D1BB009F658B /* LaunchScreen.storyboard */,
 				5E6F23D32993532F009F658B /* GoogleService-Info.plist */,
@@ -94,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				5E6F23CB2992D2F8009F658B /* PressedButtonProtocol.swift */,
+				5E6F23DA29935D3A009F658B /* DelegateToControllerProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -186,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E6F23DB29935D3A009F658B /* DelegateToControllerProtocol.swift in Sources */,
 				5E6F23C32992D250009F658B /* StartScreenView.swift in Sources */,
 				5E6F23D6299357C7009F658B /* AuthManager.swift in Sources */,
 				5E6F23CC2992D2F8009F658B /* PressedButtonProtocol.swift in Sources */,
@@ -193,6 +200,7 @@
 				5E6F23CF2992D324009F658B /* Constants.swift in Sources */,
 				5E6F23B12992D1BA009F658B /* SceneDelegate.swift in Sources */,
 				5E6F23C92992D2D2009F658B /* StartScreenViewController.swift in Sources */,
+				5E6F23D929935C21009F658B /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
