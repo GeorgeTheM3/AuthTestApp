@@ -22,21 +22,30 @@ class StartScreenView: UIView {
         let label = UILabel()
         label.text = "Phone number"
         label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
         label.font = UIFont(name: "AlNile-Bold", size: 15)
         return label
     }()
 
-    private lazy var enterYourPhoneNumberTaxtField: UITextField = {
+    private lazy var phoneNumberTextField: UITextField = {
         let textField = UITextField()
         textField.layer.cornerRadius = 5
         textField.layer.borderWidth = 1
+        textField.text = "+7 "
         textField.keyboardType = .numberPad
         textField.borderStyle = .roundedRect
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.addTarget(self, action: #selector(changeValue), for: .allEditingEvents)
         return textField
     }()
+    
+    // if change text field text
+    @objc private func changeValue() {
+        guard let text = phoneNumberTextField.text else { return }
+        guard text.hasPrefix("+7 ") else { return phoneNumberTextField.text = "+7 "}
+        if text.count > 15 {
+            phoneNumberTextField.text?.removeLast()
+        }
+    }
 
     private lazy var signInButton: UIButton = {
         let button = UIButton()
@@ -64,7 +73,7 @@ class StartScreenView: UIView {
         addSubview(backgroundImageView)
         addSubview(signInButton)
         addSubview(phoneLabel)
-        addSubview(enterYourPhoneNumberTaxtField)
+        addSubview(phoneNumberTextField)
     }
 
     private func setConstraintsViews() {
@@ -72,22 +81,22 @@ class StartScreenView: UIView {
             make.size.equalToSuperview()
         }
         
-        enterYourPhoneNumberTaxtField.snp.makeConstraints { make in
+        phoneNumberTextField.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.height.equalTo(50)
             make.width.equalTo(280)
         }
         
         phoneLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(enterYourPhoneNumberTaxtField.snp.top)
-            make.leading.equalTo(enterYourPhoneNumberTaxtField.snp.leading)
+            make.bottom.equalTo(phoneNumberTextField.snp.top)
+            make.leading.equalTo(phoneNumberTextField.snp.leading)
         }
         
         signInButton.snp.makeConstraints { make in
             make.width.equalTo(150)
             make.height.equalTo(42)
             make.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
-            make.top.equalTo(enterYourPhoneNumberTaxtField.snp.bottom).offset(20)
+            make.top.equalTo(phoneNumberTextField.snp.bottom).offset(20)
         }
     }
 }
