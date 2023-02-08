@@ -16,6 +16,8 @@
 		5E6F23C92992D2D2009F658B /* StartScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F23C82992D2D2009F658B /* StartScreenViewController.swift */; };
 		5E6F23CC2992D2F8009F658B /* PressedButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F23CB2992D2F8009F658B /* PressedButtonProtocol.swift */; };
 		5E6F23CF2992D324009F658B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F23CE2992D324009F658B /* Constants.swift */; };
+		5E6F23D229934F68009F658B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5E6F23D129934F68009F658B /* FirebaseAuth */; };
+		5E6F23D42993532F009F658B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E6F23D32993532F009F658B /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,7 @@
 		5E6F23C82992D2D2009F658B /* StartScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenViewController.swift; sourceTree = "<group>"; };
 		5E6F23CB2992D2F8009F658B /* PressedButtonProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressedButtonProtocol.swift; sourceTree = "<group>"; };
 		5E6F23CE2992D324009F658B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5E6F23D32993532F009F658B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +40,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E6F23C62992D2A2009F658B /* SnapKit in Frameworks */,
+				5E6F23D229934F68009F658B /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +73,7 @@
 				5E6F23C72992D2B0009F658B /* StartScreen */,
 				5E6F23B72992D1BB009F658B /* Assets.xcassets */,
 				5E6F23B92992D1BB009F658B /* LaunchScreen.storyboard */,
+				5E6F23D32993532F009F658B /* GoogleService-Info.plist */,
 				5E6F23BC2992D1BB009F658B /* Info.plist */,
 			);
 			path = AuthTestApp;
@@ -117,6 +122,7 @@
 			name = AuthTestApp;
 			packageProductDependencies = (
 				5E6F23C52992D2A2009F658B /* SnapKit */,
+				5E6F23D129934F68009F658B /* FirebaseAuth */,
 			);
 			productName = AuthTestApp;
 			productReference = 5E6F23AB2992D1BA009F658B /* AuthTestApp.app */;
@@ -148,6 +154,7 @@
 			mainGroup = 5E6F23A22992D1BA009F658B;
 			packageReferences = (
 				5E6F23C42992D2A2009F658B /* XCRemoteSwiftPackageReference "SnapKit" */,
+				5E6F23D029934F68009F658B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 5E6F23AC2992D1BA009F658B /* Products */;
 			projectDirPath = "";
@@ -165,6 +172,7 @@
 			files = (
 				5E6F23BB2992D1BB009F658B /* LaunchScreen.storyboard in Resources */,
 				5E6F23B82992D1BB009F658B /* Assets.xcassets in Resources */,
+				5E6F23D42993532F009F658B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +408,14 @@
 				kind = branch;
 			};
 		};
+		5E6F23D029934F68009F658B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -407,6 +423,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5E6F23C42992D2A2009F658B /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		5E6F23D129934F68009F658B /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E6F23D029934F68009F658B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
