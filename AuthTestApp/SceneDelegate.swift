@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         if Auth.auth().currentUser == nil {
-            window?.rootViewController = StartViewController()
+            window?.rootViewController = StartViewController(enteredPhoneNumber: false)
         } else {
             window?.rootViewController = MainViewController()
         }

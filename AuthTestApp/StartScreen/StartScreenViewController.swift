@@ -11,6 +11,18 @@ class StartViewController: UIViewController {
     
     private weak var delegateToStartView: DelegatePressedButtonProtocol?
     private weak var getInfoFromView: DelegateToControllerProtocol?
+    private weak var setStatus: DelegateStatusProtocol?
+    
+    private var enteredPhoneNumber: Bool
+    
+    init(enteredPhoneNumber: Bool) {
+        self.enteredPhoneNumber = enteredPhoneNumber
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         super.loadView()
@@ -21,6 +33,10 @@ class StartViewController: UIViewController {
         super.viewDidLoad()
         buttonAction()
         gestureCloseKeyboard()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setStatus?.setStatus(info: enteredPhoneNumber)
     }
     
     // gesture tap to close keyboard
@@ -43,6 +59,7 @@ class StartViewController: UIViewController {
         let view = StartScreenView()
         delegateToStartView = view
         getInfoFromView = view
+        setStatus = view
         return view
     }
 
@@ -51,12 +68,23 @@ class StartViewController: UIViewController {
     }
     
     @objc private func signInAction() {
-        guard let phoneNumber = getInfoFromView?.passToController(info: String()) else { return }
-        AuthManager.shared.startAuth(phoneNumber: phoneNumber) { [weak self] success in
-            guard success else { return }
-            DispatchQueue.main.async {
-                print("success")
-                print("\(success)")
+        guard let user = getInfoFromView?.passToController(info: User()) else { return }
+        if user.smsCode == "" {
+            AuthManager.shared.startAuth(phoneNumber: user.phoneNumber) { success in
+                guard success else { return }
+                DispatchQueue.main.async {
+                    print("success")
+                }
+            }
+            self.enteredPhoneNumber = true
+        } else {
+            AuthManager.shared.verifyCode(smsCode: user.smsCode) { success in
+                guard success else { return }
+                DispatchQueue.main.async {
+                    let mainViewController = MainViewController()
+                    mainViewController.modalPresentationStyle = .fullScreen
+                    self.present(mainViewController, animated: true)
+                }
             }
         }
     }

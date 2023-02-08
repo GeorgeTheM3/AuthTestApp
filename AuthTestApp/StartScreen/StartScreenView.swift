@@ -39,6 +39,18 @@ class StartScreenView: UIView {
         return textField
     }()
     
+    private lazy var smsCodeTextField: UITextField = {
+        let textField = UITextField()
+        textField.layer.cornerRadius = 5
+        textField.layer.borderWidth = 1
+        textField.placeholder = "Enter code"
+        textField.keyboardType = .numberPad
+        textField.borderStyle = .roundedRect
+        textField.isHidden = true
+        textField.addTarget(self, action: #selector(changeValue), for: .allEditingEvents)
+        return textField
+    }()
+    
     // if change text field text
     @objc private func changeValue() {
         guard let text = phoneNumberTextField.text else { return }
@@ -75,6 +87,7 @@ class StartScreenView: UIView {
         addSubview(signInButton)
         addSubview(phoneLabel)
         addSubview(phoneNumberTextField)
+        addSubview(smsCodeTextField)
     }
 
     private func setConstraintsViews() {
@@ -83,6 +96,12 @@ class StartScreenView: UIView {
         }
         
         phoneNumberTextField.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.height.equalTo(50)
+            make.width.equalTo(280)
+        }
+        
+        smsCodeTextField.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.height.equalTo(50)
             make.width.equalTo(280)
@@ -100,6 +119,22 @@ class StartScreenView: UIView {
             make.top.equalTo(phoneNumberTextField.snp.bottom).offset(20)
         }
     }
+    
+    private func showSmsCodeTextField() {
+        UIView.animate(withDuration: 1) {
+            self.phoneLabel.transform = CGAffineTransform(translationX: 0, y: -70)
+            self.phoneNumberTextField.transform = CGAffineTransform(translationX: 0, y: -70)
+            self.smsCodeTextField.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        } completion: { _ in
+            UIView.animate(withDuration: 0.5) {
+                self.smsCodeTextField.transform = .identity
+                self.smsCodeTextField.isHidden = false
+            }
+            self.phoneNumberTextField.layoutIfNeeded()
+            self.smsCodeTextField.layoutIfNeeded()
+            self.phoneLabel.layoutIfNeeded()
+        }
+    }
 }
 
 extension StartScreenView: DelegatePressedButtonProtocol {
@@ -115,6 +150,20 @@ extension StartScreenView: DelegatePressedButtonProtocol {
 
 extension StartScreenView: DelegateToControllerProtocol {
     func passToController<T>(info: T?) -> T? {
-        phoneNumberTextField.text as? T
+        if let phone = phoneNumberTextField.text, let code = smsCodeTextField.text {
+            return User(phoneNumber: phone, smsCode: code) as? T
+        }
+        return nil
     }
 }
+
+extension StartScreenView: DelegateStatusProtocol {
+    func setStatus<T>(info: T?) -> T? {
+        if let info = info as? Bool, info == true {
+            showSmsCodeTextField()
+            signInButton.setTitle("Enter code", for: .normal)
+        }
+        return nil
+    }
+}
+
